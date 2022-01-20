@@ -3,6 +3,9 @@ package it.etlabora.biblioteca.service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import it.etlabora.biblioteca.dto.LibroDto;
 import it.etlabora.biblioteca.mapper.LibroMapper;
 import it.etlabora.biblioteca.model.Libro;
@@ -121,15 +124,45 @@ public class LibroService {
 			Libro libro = new Libro();
 			libro.setId(rs.getLong("id"));
 			libro.setTitolo(rs.getString("titolo"));
-			libro.setAutori(rs.getString("autore"));
+			libro.setAutori(rs.getString("autori"));
 			libro.setCategoria(rs.getString("categoria"));
 			libro.setStato(rs.getString("stato"));
-			libro.setCasaEditrice(rs.getString("casa editrice"));
+			libro.setCasaEditrice(rs.getString("casa_editrice"));
 			dto = libromapper.toDto(libro);
 			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return dto;
+	}
+	
+	public List<LibroDto> getAll(){
+		List<LibroDto> libri = new ArrayList<>();
+		try {
+			
+			Connection conn = DbConnection.getConnection();
+			String sql="SELECT * FROM LIBRO";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			ResultSet rs = statement.executeQuery();
+			
+			Libro libro;
+			while(rs.next()) {
+				libro = new Libro();
+				libro.setId(rs.getLong("id"));
+				libro.setTitolo(rs.getString("titolo"));
+				libro.setCasaEditrice(rs.getString("casa_editrice"));
+				libro.setAutori(rs.getString("autori"));
+				libro.setCategoria(rs.getString("categoria"));
+				libro.setIsbn(rs.getString("isbn"));
+				libro.setNote(rs.getString("note"));
+				libro.setStato(rs.getString("stato"));
+				
+				libri.add(libromapper.toDto(libro));
+			}
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return libri;
 	}
 }

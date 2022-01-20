@@ -19,8 +19,39 @@
 		<servlet-class>it.etlabora.biblioteca.servlet.LoginServlet
 		</servlet-class>
 	</servlet>
+	
 	<servlet-mapping>
+	
 		<servlet-name>index</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+<servlet>
+	<servlet-name>catalogo</servlet-name>
+	<servlet-class>it.etlabora.biblioteca.servlet.CatalogoServlet
+	</servlet-class>
+</servlet>
+	<servlet-mapping>
+		<servlet-name>catalogo</servlet-name>
+		<url-pattern>/catalogo</url-pattern>
+	</servlet-mapping>
+	<servlet>
+	<servlet-name>Dettaglio</servlet-name>
+	<servlet-class>it.etlabora.biblioteca.servlet.CatalogoServlet
+	</servlet-class>
+</servlet>
+	<servlet-mapping>
+		<servlet-name>Dettaglio</servlet-name>
+		<url-pattern>/dettaglio</url-pattern>
+	</servlet-mapping>
+		<servlet>
+	<servlet-name>Prenota</servlet-name>
+	<servlet-class>it.etlabora.biblioteca.servlet.PrenotaServlet
+	</servlet-class>
+</servlet>
+	<servlet-mapping>
+		<servlet-name>Prenota</servlet-name>
+		<url-pattern>/prenota</url-pattern>
+	</servlet-mapping>
+	
+
 </web-app>
